@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Управление бронированием </title>
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <a class="logotype" href="/"><i class="fa fa-bicycle"></i>Прокат велосипедов</a>
+    </nav>
+</header>
+
+<div id="content">
+    <form action="" method="post">
+        <p>
+            <input type = "submit" name = "active" value = "Активировать" class="btn bg-green btn-bigger">
+            <a href="#openModal"><input type = "button" name = "disagree" value = "Завершить" class="btn bg-red btn-bigger"></a>
+        </p>
+    </form>
+
+    <% if (parameter == 'active') { %>
+        <div id="info" class="block-info">
+            Заказ успешно активирован
+        </div>
+    <% } else if (parameter == 'complete') { %>
+        <div id="info" class="block-info">
+            Ваше врермя проката составило <%= Math.round(total / 60) %> мин. <%= total % 60 %> сек.
+            <br>Итоговая сумма проката составляет <%= total * Math.round(total / 60 + 1) %> руб.
+        </div>
+    <% } else if (parameter == 'error') { %>
+        <div id="info" class="block-info">
+            Произошла ошибка. Причина: <%= info %>
+        </div>
+    <% } %>
+
+</div>
+
+<div id="openModal" class="modalDialog">
+    <div>
+        <a href="#close" title="Закрыть" class="close">X</a>
+        <h2>Завершение проката</h2>
+        <form action="" method="post">
+            <p><b>Выберите адрес возврата велосипеда:</b><br>
+            <p><select name="select"  size="1" required>
+                    <option></option>
+                    <% locations.forEach(function(locate) { %>
+                        <option value="<%= locate.location %>"><%= locate.location %></option>
+                    <% }) %>
+                </select></p>
+            <p><input type = "submit" value="Отправить" name="disagree" class="btn bg-green btn-bigger"></p>
+        </form>
+    </div>
+</div>
+
+
+</body>
+<html>

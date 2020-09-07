@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title> Прокат велосипедов </title>
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script type='text/javascript' src='scripts.js'></script>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <a class="logotype" href=""><i class="fa fa-bicycle"></i>Прокат велосипедов</a>
+    </nav>
+</header>
+
+<div id="content">
+    <ul>
+        <% bikes.forEach(function(bike, i) { %>
+        <li class="products clearfix">
+        <li class="product-wrapper" id="<%=i+1%>">
+            <div class="product" >
+                <a href="#openModal" onclick="test(document.getElementById('<%=i+1%>').id)">
+                    <div class="product-photo">
+                        <img src="images/<%= bike.bike_img %>">
+                    </div>
+                    <div>
+                        <hr class="hr-shelf">
+                    </div>
+                </a>
+                <div id="bname<%=i+1%>" class="title"><%= bike.bike_name %></div>
+                <div name="description" class="description">
+                    <%= bike.bike_description %>
+                </div>
+                <div id="cost<%=i+1%>" class="price"><%= bike.bike_cost %></div>
+                <div name="cost-comment" class="cost-comment">
+                    руб/мин
+                </div>
+            </div>
+        </li>
+        </li>
+        <% }) %>
+    </ul>
+</div>
+
+<div id="openModal" class="modalDialog">
+    <div>
+        <a href="#close" title="Закрыть" class="close">X</a>
+        <h2>Заказ на прокат велосипеда</h2>
+        <p>Заполните анкету:</p>
+        <form action="order" method="post">
+            <p><b>Выберите адрес получения велосипеда:</b><br>
+            <p><select name="select"  size="1" required>
+                    <option></option>
+                    <% locations.forEach(function(locate, i) { %>
+                        <option value="<%= locate.location %>"><%= locate.location %></option>
+                    <% }) %>
+                </select></p>
+
+            <p><b>Ваше имя:</b><br>
+            <p><input type = "text" name="uname" required></p>
+
+            <p><b>Введите дату и время:</b><br>
+            <p><input type = "datetime-local" name="datetime" required></p>
+
+            <p><b>Ваш номер телефона:</b><br>
+            <p><input type = "tel" name="mobile" placeholder="+79991239870" required></p>
+
+            <p><b>Марка велосипеда</b><br>
+            <p><input type = "text" name="nbike" readonly="readonly" id="nbike"></p>
+
+            <p><b>Цена велосипеда</b><br>
+            <p><input type = "text" name="price" readonly="readonly" id="price"></p>
+
+            <p><input type = "submit" value="Отправить" class="btn bg-green btn-bigger"></p>
+        </form>
+    </div>
+</div>
+
+</body>
+<html>
