@@ -28,7 +28,7 @@ if ([System.Environment]::Is64BitOperatingSystem) {
 	$ostype = "x64"
 	write-host "64-bit operating system defined"
 } else {
-	$ostype= "x32"
+	$ostype= "x86"
 	write-host "32-bit operating system defined"
 }
 
